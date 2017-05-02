@@ -1,0 +1,33 @@
+<h1>{{hello}}</h1>
+
+<div id="mapid">{{mymap}}</div>
+
+<script type="text/javascript">
+
+  var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+  L.tileLayer(
+  'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+  {
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoiZWRnYXJmaW5uIiwiYSI6ImNqMjA2NGlwMDAwMjYzMnFoMHhrbXoweTQifQ.28GK8eSkR49V3lznj-hChw'
+  }).addTo(mymap);
+
+  // instead of import {} from 'leaflet-geosearch', use the `window` global
+  var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+  var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+
+  // remaining is the same as in the docs, accept for the var instead of const declarations
+  var provider = new OpenStreetMapProvider();
+
+  var searchControl = new GeoSearchControl({
+  provider: provider,
+  });
+
+  // var map = new L.Map('map');
+  mymap.addControl(searchControl);
+
+
+
+</script>
